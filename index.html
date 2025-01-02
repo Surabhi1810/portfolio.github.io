@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surabhi P - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">DAA</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#business-cases">Business Cases</a> <!-- New Tab for Business Cases -->
+                <a href="#reflections">Reflections</a> <!-- New Tab for Reflections -->
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Surabhi P</h1>
+                    <p class="subtitle">Technology Enthusiast & Problem Solver</p>
+                    <div class="cta-buttons">
+                        <a href="#contact" class="primary-btn">Get in Touch</a>
+                        <a href="#projects" class="secondary-btn">View Projects</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <!-- Placeholder for profile image -->
+                    <div class="profile-placeholder"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="projects" class="section projects-section">
+            <div class="container">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3>Engineering Exploration</h3>
+                            <p>Paper cutting machine </p>
+                            <h3>Design thinknig for social innovation</h3>
+                            <p>Lack of importance of education among parents </p>
+                            <h3>Waste water management</h3>
+                            <p>Innovative solutions for urban water management in Mumbai, focusing on sustainable practices and efficient distribution systems.</p>
+                            <div class="project-tags">
+                                <span>Environmental</span>
+                                <span>Urban Planning</span>
+                                <span>Sustainability</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="business-cases" class="section business-cases-section">
+    <div class="container">
+        <h2 class="section-title">Business Cases</h2>
+        <div class="business-cases-grid">
+           
+         <!-- New Business Case: AquaFlow Solutions -->
+<div class="business-case-card">
+    <h3>AquaFlow Solutions: Smart Wastewater Management</h3>
+    <p>.AquaFlow Solutions leverages advanced data analytics and machine learning techniques to revolutionize wastewater management. By utilizing predictive modeling and system optimization, the company ensures efficient water recycling and reuse, fostering sustainability while reducing operational costs.</p>
+    <div class="business-tags">
+        <span>Environmental</span>
+        <span>Water Management</span>
+        <span>Sustainability</span>
+    </div>
+    <ul>
+        <li><strong>Predictive Maintenance:</strong> Leveraging IoT and machine learning to forecast equipment failures, ensuring uninterrupted operation and reducing downtime.</li>
+        <li><strong>Resource Allocation:</strong> Smart allocation of energy and chemicals to maximize efficiency and minimize waste.</li>
+        <li><strong>System Monitoring:</strong> Real-time tracking of water quality and flow metrics using sensor networks.</li>
+    </ul>
+    <p><strong>Benefits:</strong></p>
+    <ul>
+        <li>Significant reduction in freshwater consumption by maximizing water reuse</li>
+        <li>Lower operational costs through energy-efficient processes and predictive maintenance</li>
+        <li>Enhanced ability to meet environmental regulations with data-driven processes.</li>
+    </ul>
+</div>
+
+<!-- Code Example in the Middle -->
+<div class="code-container code-center">
+    <h4>Code Example:</h4>
+    <pre>
+        <code>
+#include &lt;iostream&gt;
+#include &lt;unordered_map&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;set&gt;
+#include &lt;stack&gt;
+
+using namespace std;
+
+class WaterFlowGraph {
+private:
+    unordered_map<string, vector<string>> graph;
+
+public:
+    void addEdge(const string& source, const string& destination) {
+        graph[source].push_back(destination);
+    }
+
+    vector<string> bfs(const string& start, const string& end) {
+        queue<vector<string>> q;
+        unordered_set<string> visited;
+        q.push({start});
+
+        while (!q.empty()) {
+            vector<string> path = q.front();
+            q.pop();
+            string current = path.back();
+
+            if (visited.find(current) != visited.end()) {
+                continue;
+            }
+            visited.insert(current);
+
+            if (current == end) {
+                return path;
+            }
+
+            for (const string& neighbor : graph[current]) {
+                vector<string> newPath = path;
+                newPath.push_back(neighbor);
+                q.push(newPath);
+            }
+        }
+        return {};
+    }
+
+    bool dfs(const string& node, unordered_set<string>& visited, unordered_set<string>& pathStack) {
+        if (pathStack.find(node) != pathStack.end()) {
+            return true; // Cycle detected
+        }
+        if (visited.find(node) != visited.end()) {
+            return false; // Node already processed
+        }
+
+        visited.insert(node);
+        pathStack.insert(node);
+
+        for (const string& neighbor : graph[node]) {
+            if (dfs(neighbor, visited, pathStack)) {
+                return true;
+            }
+        }
+
+        pathStack.erase(node);
+        return false;
+    }
+
+    bool detectCycle() {
+        unordered_set<string> visited;
+        unordered_set<string> pathStack;
+
+        for (const auto& entry : graph) {
+            if (visited.find(entry.first) == visited.end()) {
+                if (dfs(entry.first, visited, pathStack)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+};
+
+int main() {
+    WaterFlowGraph waterGraph;
+
+    // Adding edges (pipelines between treatment points)
+    waterGraph.addEdge("Source", "Plant A");
+    waterGraph.addEdge("Plant A", "Plant B");
+    waterGraph.addEdge("Plant B", "Plant C");
+    waterGraph.addEdge("Plant C", "Plant A"); // Cycle for testing
+
+    // BFS: Finding the shortest water flow path
+    string start = "Source", end = "Plant C";
+    vector<string> shortestPath = waterGraph.bfs(start, end);
+
+    if (!shortestPath.empty()) {
+        cout << "Shortest path from " << start << " to " << end << ": ";
+        for (const string& node : shortestPath) {
+            cout << node << " ";
+        }
+        cout << endl;
+    } else {
+        cout << "No path found from " << start << " to " << end << "." << endl;
+    }
+
+    // DFS: Detecting cycles in the water flow graph
+    cout << "\nCycle Detection:" << endl;
+    if (waterGraph.detectCycle()) {
+        cout << "Cycle detected in the system." << endl;
+    } else {
+        cout << "No cycles detected in the system." << endl;
+    }
+
+    return 0;
+}
+        </code>
+    </pre>
+</div>
+
+
+        <!-- New Section: Reflections -->
+        <section id="reflections" class="section reflections-section">
+    <div class="container">
+        <h2 class="section-title">Reflections</h2>
+        <div class="reflections-grid">
+            <div class="reflection-card">
+                <h3>Time Complexity Analysis</h3>
+                <p><strong>Challenge:</strong> Difficulty in understanding the mathematical derivations behind time complexity and Big-O notation for nested loops or recursive algorithms.</p>
+                <p><strong>Solution:</strong> Practice with step-by-step tracing of algorithms and solving problems to develop an intuitive grasp.</p>
+            </div>
+            <div class="reflection-card">
+                <h3>Binary Search Tree (BST)</h3>
+                <p><strong>Challenge:</strong> Understanding edge cases such as handling duplicate values and deletion of nodes with two children.</p>
+                <p><strong>Solution:</strong> Visual tools or simulators can help illustrate insertions, deletions, and traversal operations.</p>
+            </div>
+            <div class="reflection-card">
+                <h3>DFS and BFS</h3>
+                <p><strong>Challenge:</strong> Grasping the implementation differences and their impact on solving problems, especially with cyclic or weighted graphs.</p>
+                <p><strong>Solution:</strong> Hands-on coding of examples such as mazes or network analysis to internalize the concepts.</p>
+            </div>
+            <div class="reflection-card">
+                <h3>Heap</h3>
+                <p><strong>Challenge:</strong> Comprehending how heaps maintain their structure dynamically during insertions and deletions.</p>
+                <p><strong>Solution:</strong> Writing manual examples and debugging heap implementations in code.</p>
+            </div>
+            <div class="reflection-card">
+                <h3>Sorting Algorithms</h3>
+                <p><strong>Challenge:</strong> Distinguishing between the trade-offs of various sorting algorithms (e.g., stability, memory usage, and time complexity).</p>
+                <p><strong>Solution:</strong> Comparing real-world datasets and observing sorting performance.</p>
+            </div>
+            <div class="reflection-card">
+                <h3>Pattern Searching</h3>
+                <p><strong>Challenge:</strong> Understanding advanced techniques like the Knuth-Morris-Pratt (KMP) or Boyer-Moore algorithm due to complex preprocessing steps.</p>
+                <p><strong>Solution:</strong> Breaking down algorithms into small, digestible steps with worked-out examples.</p>
+            </div>
+            <div class="reflection-card">
+                <h3>Graph Algorithms</h3>
+                <p><strong>Challenge:</strong> Understanding complex algorithms like Dijkstra's or Floyd-Warshall for shortest paths, and their application in weighted and directed graphs.</p>
+                <p><strong>Solution:</strong> Applying graph algorithms to solve real-world scenarios, such as routing problems or network analysis.</p>
+            </div>
+        </div>
+    </div>
+</section>
+        
+
+
+        <section id="skills" class="section skills-section">
+            <div class="container">
+                <h2 class="section-title">Technical Expertise</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h3>Programming</h3>
+                        <ul>
+                            <li>C++</li>
+                            <li>Python</li>
+                            <li>C</li>
+                        </ul>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Core CS</h3>
+                        <ul>
+                            <li>Data Structures</li>
+                            <li>Algorithms</li>
+                            <li>Problem Solving</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section academic-section">
+            <div class="container">
+                <h2 class="section-title">Academic Profile</h2>
+                <div class="academic-grid">
+                    <div class="academic-card">
+                        <div class="academic-info">
+                            <div class="info-item">
+                                <h4>Course</h4>
+                                <p>Algorithmic Problem Solving (24ECAC203)</p>
+                            </div>
+                            <div class="info-item">
+                                <h4>University</h4>
+                                <p>KLE Technological University</p>
+                            </div>
+                            <div class="info-item">
+                                <h4>Instructor</h4>
+                                <p>K M M Rajashekharaiah sir</p>
+                            </div>
+                            <div class="info-item">
+                                <h4>SRN</h4>
+                                <p>01FE23BCI109</p>
+                            </div>
+                            <div class="info-item">
+                                <h4>Portfolio Domain</h4>
+                                <p>Google</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact-section">
+            <div class="container">
+                <h2 class="section-title">Connect With Me</h2>
+                <div class="social-links">
+                    <a href="https://github.com/Surabhi1810" target="_blank" class="social-btn">GitHub</a>
+                    <a href="https://www.linkedin.com/in/surabhi-petkar-3aa855343/"  target="_blank" class="social-btn">LinkedIn</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <blockquote class="inspiration-quote">
+               "There should be a place for everything, and that includes the algorithms that will make us smarter." – Tim Berners-Lee
+            </blockquote>
+        </div>
+    </footer>
+</body>
+</html>
