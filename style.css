@@ -1,7 +1,7 @@
 :root {
     --primary-color: #2d3436;
-    --secondary-color: #b19cd9;    /* Changed to light purple */
-    --accent-color: #d8bfd8;       /* Changed to lighter purple */
+    --secondary-color: #b19cd9;
+    --accent-color: #d8bfd8;
     --background-color: #f9fafb;
     --card-background: #ffffff;
     --text-primary: #2d3436;
@@ -70,7 +70,7 @@ body {
 /* Hero Section */
 .hero {
     padding: calc(var(--spacing-lg) * 2) 0;
-    background: linear-gradient(135deg, #b19cd9 0%, #d8bfd8 100%);  /* Changed to light purple gradient */
+    background: linear-gradient(135deg, #b19cd9 0%, #d8bfd8 100%);
     color: white;
     margin-top: 60px;
 }
@@ -218,7 +218,7 @@ body {
     content: "→";
     position: absolute;
     left: 0;
-    color: var(--secondary-color);
+    color: var(--accent-color);
 }
 
 /* Academic Section */
@@ -308,7 +308,8 @@ footer {
     animation: fadeIn 1s ease-out;
 }
 
-.code-center {
+
+       .code-center {
     display: flex;
     justify-content: center;
     align-items: center;
